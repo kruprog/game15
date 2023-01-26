@@ -1,24 +1,43 @@
-import logo from './logo.svg';
+
+import ReactDOM from "react-dom/client";
+import {
+  BrowserRouter,
+  createBrowserRouter,
+  Route,
+  RouterProvider,
+  Routes,
+} from "react-router-dom";
+import { createContext , useState} from 'react';
+import Mainpage from './components/mainpage/mainpage';
+import Playpage from './components/playpage/playpage';
+
+import { FieldSizeContext } from "./context";
+//import logo from './logo.svg';
 import './App.css';
 
+
 function App() {
+  const [fieldSize, setFieldSize] = useState(4)
+
+
+
+
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+
+    <FieldSizeContext.Provider value={{fieldSize,setFieldSize}}>
+    <BrowserRouter>
+    <Routes>
+      <Route path="/play" element={<Playpage></Playpage>}></Route>
+
+      <Route path="*" element={<Mainpage></Mainpage>}></Route>
+
+
+    </Routes>
+    </BrowserRouter>
+    </FieldSizeContext.Provider>
+
+
   );
 }
 
